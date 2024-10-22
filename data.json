@@ -1,0 +1,48 @@
+[
+    {
+        "name": "Daniel",
+        "age": "21",
+        "signo": "Gemeos",
+        "id": 1
+    },
+    {
+        "name": "Daniela",
+        "age": "23",
+        "signo": "Gemeos",
+        "id": 2
+    },
+    {
+        "name": "Danilo",
+        "age": "26",
+        "signo": "Gemeos",
+        "clube": "SPFC",
+        "id": 3
+    },
+    {
+        "name": "Daniel",
+        "email": [
+            "daniel@example.com",
+            "thiago.jesus@sfa.adv.br"
+        ],
+        "id": 4
+    },
+    {
+        "id": 5
+    },
+    {
+        "roomId": "asdasdasdsadasdasd",
+        "room": {
+            "messages": [
+                {
+                    "id": "sadasdasdas",
+                    "user": "thiago.jesus"
+                },
+                {
+                    "id": "sadasdasdadsfsdfsdfs",
+                    "user": "admin"
+                }
+            ]
+        },
+        "id": 6
+    }
+]

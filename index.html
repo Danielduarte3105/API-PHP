@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Tester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label, input, textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        input, textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+        code{
+            color: greenyellow;
+            background-color: #777;
+        }
+        code:hover{
+            color: greenyellow;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Teste de API</h1>
+
+    <!-- Seção para realizar requisições GET -->
+    <h2>GET (Buscar Registro)</h2>
+    <label for="getId">ID (deixe em branco para buscar todos):</label>
+    <input type="text" id="getId" placeholder="Digite o ID ou deixe em branco">
+    <button onclick="getRequest()">Buscar</button>
+    <pre class="result" id="getResult"></pre>
+
+    <!-- Seção para realizar requisições POST -->
+    <h2>POST (Adicionar Registro)</h2>
+    <label for="postData">Dados (JSON):</label>
+    <code>{"name": "Daniel", "email": "daniel@example.com"}</code>
+    <textarea id="postData" rows="5" placeholder='Exemplo: {"name": "Daniel", "email": "daniel@example.com"}'></textarea>
+    <button onclick="postRequest()">Adicionar</button>
+    <pre class="result" id="postResult"></pre>
+
+    <!-- Seção para realizar requisições PUT -->
+    <h2>PUT (Atualizar Registro)</h2>
+    <label for="putId">ID:</label>
+    <input type="text" id="putId" placeholder="Digite o ID para atualizar">
+    <label for="putData">Dados (JSON):</label>
+    <code>{"name": "Daniel", "email": "daniel@example.com"}</code>
+    <textarea id="putData" rows="5" placeholder='Exemplo: {"name": "Novo Nome", "email": "novoemail@example.com"}'></textarea>
+    <button onclick="putRequest()">Atualizar</button>
+    <pre class="result" id="putResult"></pre>
+
+    <!-- Seção para realizar requisições DELETE -->
+    <h2>DELETE (Excluir Registro)</h2>
+    <label for="deleteId">ID:</label>
+    <input type="text" id="deleteId" placeholder="Digite o ID para excluir">
+    <button onclick="deleteRequest()">Excluir</button>
+    <pre class="result" id="deleteResult"></pre>
+</div>
+
+<script>
+    const apiBaseUrl = 'http://localhost:8282/api.php';
+
+    // Função para fazer requisição GET
+    function getRequest() {
+        const id = document.getElementById('getId').value;
+        const url = id ? `${apiBaseUrl}/get/id=${id}` : `${apiBaseUrl}/get`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('getResult').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                document.getElementById('getResult').textContent = `Erro: ${error}`;
+            });
+    }
+
+    // Função para fazer requisição POST
+    function postRequest() {
+        const data = document.getElementById('postData').value;
+
+        fetch(`${apiBaseUrl}/post`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: data
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('postResult').textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+            document.getElementById('postResult').textContent = `Erro: ${error}`;
+        });
+    }
+
+    // Função para fazer requisição PUT
+    function putRequest() {
+        const id = document.getElementById('putId').value;
+        const data = document.getElementById('putData').value;
+
+        fetch(`${apiBaseUrl}/put/id=${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: data
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('putResult').textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+            document.getElementById('putResult').textContent = `Erro: ${error}`;
+        });
+    }
+
+    // Função para fazer requisição DELETE
+    function deleteRequest() {
+        const id = document.getElementById('deleteId').value;
+
+        fetch(`${apiBaseUrl}/delete/id=${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('deleteResult').textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+            document.getElementById('deleteResult').textContent = `Erro: ${error}`;
+        });
+    }
+</script>
+
+</body>
+</html>
