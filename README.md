@@ -23,7 +23,7 @@ Para instalar e configurar a API, siga estas etapas:
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/SeuUsuario/APICRUD.git
+   git clone https://github.com/Danielduarte3105/API-PHP/edit/main/README.md
    cd APICRUD
    ```
 
