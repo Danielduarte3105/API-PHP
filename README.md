@@ -14,7 +14,7 @@ Uma breve descrição da sua API e o que ela faz.
 
 ## Introdução
 
-Esta é uma API construída em PHP que permite [descrever brevemente as funcionalidades da API]. É projetada para ser fácil de usar e integrada em diferentes aplicações.
+Esta é uma API construída em PHP que permite realizar CRUDs completos. É projetada para ser fácil de usar e integrada em diferentes aplicações.
 
 ## Instalação
 
